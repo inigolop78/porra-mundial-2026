@@ -1,17 +1,9 @@
-// KILL ALL CACHES
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
-    .then(() => self.skipWaiting())
-  );
-});
+// v1781468931 - no cache
+self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
-    .then(() => self.registration.unregister())
-    .then(() => self.clients.matchAll()).then(clients => {
-      clients.forEach(client => client.navigate(client.url));
-    })
+    .then(() => self.clients.claim())
   );
 });
 self.addEventListener('fetch', e => {
