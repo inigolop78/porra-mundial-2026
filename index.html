@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a1628">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Porra 2026">
+  <link rel="manifest" href="manifest.json?v=1781451390">
+  <title>Porra Mundial 2026</title>
+  <link rel="stylesheet" href="style2.css?v=1781451770">
+  <script>
+    // Kill all service workers and caches immediately
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(r => r.unregister());
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+    }
+  </script>
+</head>
+<body>
+  <div id="splash">
+    <div class="splash-ball">⚽</div>
+    <h1>MUNDIAL<br><span>2026</span></h1>
+    <p>Comunio</p>
+  </div>
+
+  <div id="app" class="hidden">
+    <header>
+      <div class="header-inner">
+        <span class="header-logo">⚽</span>
+        <h1 class="header-title">Mundial 2026</h1>
+        <div class="header-right">
+          <div id="sync-status" class="sync-idle"></div>
+          <span class="header-sub">Comunio</span>
+        </div>
+      </div>
+    </header>
+
+    <nav id="main-nav">
+      <button class="nav-btn active" data-section="fasegrupos">
+        <span class="nav-icon">🗓️</span><span>Fase Grupos</span>
+      </button>
+      <button class="nav-btn" data-section="eliminatorias">
+        <span class="nav-icon">🏆</span><span>Eliminatorias</span>
+      </button>
+      <button class="nav-btn" data-section="puntuaciones">
+        <span class="nav-icon">📋</span><span>Puntuaciones</span>
+      </button>
+      <button class="nav-btn" data-section="apuestas">
+        <span class="nav-icon">⭐</span><span>Apuestas</span>
+      </button>
+    </nav>
+
+    <main id="content">
+      <section id="sec-fasegrupos" class="section active">
+        <div id="fasegrupos-container"></div>
+      </section>
+      <section id="sec-eliminatorias" class="section">
+        <div class="section-header"><h2>Eliminatorias</h2></div>
+        <div id="eliminatorias-container"></div>
+      </section>
+      <section id="sec-puntuaciones" class="section">
+        <div class="section-header"><h2>Sistema de Puntuación</h2></div>
+        <div id="puntuaciones-container"></div>
+      </section>
+      <section id="sec-apuestas" class="section">
+        <div class="section-header"><h2>Apuestas</h2></div>
+        <div id="apuestas-container"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title">Resultado</h3>
+        <button id="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-teams">
+          <span id="modal-local" class="modal-team"></span>
+          <div class="modal-score">
+            <input type="number" id="score-local" min="0" max="99" placeholder="–">
+            <span class="score-sep">:</span>
+            <input type="number" id="score-visit" min="0" max="99" placeholder="–">
+          </div>
+          <span id="modal-visit" class="modal-team"></span>
+        </div>
+        <div class="modal-actions">
+          <button id="modal-clear" class="btn-secondary">Borrar</button>
+          <button id="modal-save" class="btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js?v=1781451390"></script>
+  <script src="api.js?v=1781451390"></script>
+  <script src="app.js?v=1781451390"></script>
+</body>
+</html>
