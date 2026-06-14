@@ -440,8 +440,7 @@ function renderApuestas() {
     return {...p, total, breakdown};
   }).sort((a,b)=>b.total-a.total);
 
-  const medals = ['🥇','🥈','🥉'];
-  const getMedal = (i) => i < 3 ? getMedal(i) : String(i+1);
+  const getMedal = (i) => i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : String(i+1);
 
   // Layout: 2 rows of 5 participants + ranking on right
   const apuestasLayout = document.createElement('div');
