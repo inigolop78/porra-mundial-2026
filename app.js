@@ -440,7 +440,8 @@ function renderApuestas() {
     return {...p, total, breakdown};
   }).sort((a,b)=>b.total-a.total);
 
-  const medals = ['🥇','🥈','🥉','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
+  const medals = ['🥇','🥈','🥉'];
+  const getMedal = (i) => i < 3 ? getMedal(i) : String(i+1);
 
   // Layout: 2 rows of 5 participants + ranking on right
   const apuestasLayout = document.createElement('div');
@@ -462,7 +463,7 @@ function renderApuestas() {
     const sorted = [...p.equipos].sort((a,b)=>(p.breakdown[b]||0)-(p.breakdown[a]||0));
     card.innerHTML = `
       <div class="apuesta-card-header">
-        <span>${medals[i]} <strong>${p.nombre}</strong></span>
+        <span>${getMedal(i)} <strong>${p.nombre}</strong></span>
         <span class="apuesta-total">${p.total} pts</span>
       </div>
       <div class="apuesta-teams-list">
@@ -493,7 +494,7 @@ function renderApuestas() {
     const row = document.createElement('div');
     row.className = `rank-row${i===0?' rank-first':''}`;
     row.innerHTML = `
-      <span class="rank-medal">${medals[i]}</span>
+      <span class="rank-medal">${getMedal(i)}</span>
       <span class="rank-name">${p.nombre}</span>
       <span class="rank-pts">${p.total}</span>
     `;
